@@ -7,7 +7,7 @@ import { Save, ModeEdit, Delete, Add} from '@mui/icons-material'
 import axios from 'axios';
 import useAxios from 'axios-hooks'
 
-export default function DenseTable() {
+export default function LocationTable() {
   const [{ data: dataCallback, loading: loadCallback, error }, refetch] = useAxios(
     "http://localhost:8080/locations/"
   );
