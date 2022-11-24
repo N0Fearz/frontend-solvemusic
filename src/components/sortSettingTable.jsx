@@ -9,7 +9,7 @@ import useAxios from 'axios-hooks'
 
 export default function SortSettingTable() {
   const [{ data: dataCallback, loading: loadCallback, error }, refetch] = useAxios(
-    "http://localhost:8080/folders/"
+    "http://localhost:8081/folders/"
   );
 
     const [locations, setLocations] = useState([]);
@@ -46,7 +46,7 @@ export default function SortSettingTable() {
               setTimeout(() => {
                 axios
                     .post(
-                      "http://localhost:8080/folders/add",
+                      "http://localhost:8081/folders/add",
                       {
                         folderName: newData.folderName,
                         folderPath: newData.folderPath
@@ -70,7 +70,7 @@ export default function SortSettingTable() {
                 if(oldData){
                   axios
                   .put(
-                    "http://localhost:8080/folders/edit/" + oldData.folderId,
+                    "http://localhost:8081/folders/edit/" + oldData.folderId,
                     {
                       folderName: newData.folderName,
                       folderPath: newData.folderPath
@@ -92,7 +92,7 @@ export default function SortSettingTable() {
               setTimeout(() => {
                 resolve();
                 axios
-                  .delete("http://localhost:8080/folders/delete/" + oldData.folderId)
+                  .delete("http://localhost:8081/folders/delete/" + oldData.folderId)
                   .then(res => {
                     resolve();
                     setState(prevState => {
