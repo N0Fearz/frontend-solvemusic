@@ -12,20 +12,23 @@ export default function LocationTable() {
     "http://localhost:8080/locations/"
   );
 
-    const [locations, setLocations] = useState([]);
+    const [locations, setLocations] = useState();
     const [state, setState] = useState({
       data: []
 });
     useEffect(() => {
-      // console.log("test")
     if (!loadCallback) {
-      console.log(dataCallback)
-      setState({ data: dataCallback });
+      setLocations(dataCallback );
     } 
        }, [dataCallback]);
 
 
   return (
+    <div>
+    {!dataCallback ? <p>Loading...</p> :
+    
+    
+    
     <MaterialTable
       title="Filelocations"
       options={{
@@ -42,7 +45,7 @@ export default function LocationTable() {
           title: 'Destination', field: 'locationDestination',
       },
       ]}
-      data={state.data}
+      data={locations !== [] ? locations : [] }
       editable={{
         onRowAdd: newData =>
             new Promise((resolve, reject) => {
@@ -58,8 +61,8 @@ export default function LocationTable() {
                     ).then(res=>{
                       console.log(res)
                       resolve();
-                      setState(prevState => {
-                          const data = [...prevState.data];
+                      setLocations(prevState => {
+                          const data = [...prevState];
                           console.log(newData);
                           data.push(newData);
                           return {...prevState, data};
@@ -83,8 +86,8 @@ export default function LocationTable() {
                   ).then(res=>{
                     console.log(res)
                     resolve();
-                    setState(prevState => {
-                      const data = [...prevState.data];
+                    setLocations(prevState => {
+                      const data = [...prevState];
                       data[data.indexOf(oldData)] = newData;
                       return {...prevState, data};
                     });
@@ -100,8 +103,8 @@ export default function LocationTable() {
                   .delete("http://localhost:8080/locations/delete/" + oldData.locationId)
                   .then(res => {
                     resolve();
-                    setState(prevState => {
-                      const data = [...prevState.data];
+                    setLocations(prevState => {
+                      const data = [...prevState];
                       data.splice(data.indexOf(oldData), 1)
                       return{...oldData, data}
                     })
@@ -110,45 +113,7 @@ export default function LocationTable() {
             })
     }}
     />
+  }
+    </div>
   )
 }
-
-
-// setTimeout(() => {
-//   resolve();
-//   if (oldData) {
-//     axios
-//       .post(
-//         "http://127.0.0.1/dashboard_api/updateSensorTypes.php",
-//         {
-//           id: oldData.id,
-//           name: newData.name,
-//           unit_id: newData.unit_id,
-//           consumption: newData.consumption
-//             ? newData.consumption
-//             : 0,
-//           convertible: newData.convertible
-//             ? newData.convertible
-//             : 0
-//         }
-//       )
-//       .then(res => {
-//         resolve();
-//         if (res.data.level === "success") {
-//           enqueueSnackbar(res.data.message, {
-//             variant: res.data.level
-//           });
-//           setState(prevState => {
-//             const data = [...prevState.data];
-//             data[data.indexOf(oldData)] = newData;
-//             return { ...prevState, data };
-//           });
-//         } else {
-//           enqueueSnackbar(
-//             `${res.data.status}: ${res.data.message}`,
-//             { variant: res.data.level }
-//           );
-//         }
-//       });
-//   }
-// }, 600);

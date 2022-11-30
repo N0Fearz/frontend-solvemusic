@@ -11,14 +11,14 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" data-cy="navbar">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{mr:2}}>
             SolveMusic
           </Typography>
           <Button color="inherit">Sort</Button>
           <Button onClick={()=>navigate("/locations")} color="inherit">Find</Button>
-          <Button onClick={()=>navigate("/settings")} color="inherit">Settings</Button>
+          <Button onClick={()=>navigate("/settings")} color="inherit" data-cy="nav-settings">Settings</Button>
         </Toolbar>
       </AppBar>
     </Box>
