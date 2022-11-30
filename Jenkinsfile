@@ -8,5 +8,10 @@ pipeline {
                 sh "npm run build"
             }
         }
+        stage('Test 1') {
+            steps {
+                sh "npm run cypress:ci"
+            }
+        }
     }
 }
