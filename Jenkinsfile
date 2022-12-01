@@ -11,7 +11,7 @@ pipeline {
         stage('Test Start') {
             steps {
                 script {
-                    wrap([$class: 'xvfb', screen: '1920x1080x24', debug: true]) {
+                    wrap([$class: 'Xvfb', screen: '1920x1080x24', debug: true]) {
                         stage('Test 1') {
                             steps {
                                 sh "npm run cy:run"
