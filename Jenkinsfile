@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Test 1') {
             steps {
-                sh "npm run cy:ci"
+                sh "npm run cy:run"
             }
         }
     }
