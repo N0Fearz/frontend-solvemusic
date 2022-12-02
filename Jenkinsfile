@@ -11,6 +11,7 @@ pipeline {
                 sh 'npm ci'
                 sh 'npm run cy:verify'
             }
+        }
         stage('start local server') {
              steps {
                 // start local server in the background
